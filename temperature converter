@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Temperature Converter</title>
+    <style>
+        body {
+            background-color: #f2f2f2;
+            text-align: center;
+            font-family: Arial, sans-serif;
+        }
+        .container {
+            margin-top: 100px;
+        }
+        h1 {
+            color: #FF6F61;
+        }
+        select, input, button {
+            padding: 10px;
+            font-size: 16px;
+            border: none;
+            border-radius: 5px;
+        }
+        select, input {
+            width: 100px;
+        }
+        select {
+            margin-right: 10px;
+        }
+        button {
+            background-color: #6AB04A;
+            color: white;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Temperature Converter</h1>
+        <select id="fromUnit">
+            <option value="celsius">Celsius</option>
+            <option value="fahrenheit">Fahrenheit</option>
+        </select>
+        <input type="number" id="inputTemp" placeholder="Enter temperature" />
+        <button id="convertBtn">Convert</button>
+        <select id="toUnit">
+            <option value="celsius">Celsius</option>
+            <option value="fahrenheit">Fahrenheit</option>
+        </select>
+        <p id="result"></p>
+    </div>
+
+    <script>
+        const convertButton = document.getElementById("convertBtn");
+        convertButton.addEventListener("click", convertTemperature);
+
+        function convertTemperature() {
+            const fromUnit = document.getElementById("fromUnit").value;
+            const toUnit = document.getElementById("toUnit").value;
+            const inputTemp = parseFloat(document.getElementById("inputTemp").value);
+
+            let result;
+            if (fromUnit === "celsius" && toUnit === "fahrenheit") {
+                result = (inputTemp * 9/5) + 32;
+            } else if (fromUnit === "fahrenheit" && toUnit === "celsius") {
+                result = (inputTemp - 32) * 5/9;
+            } else {
+                result = inputTemp; // If same units, no conversion needed.
+            }
+
+            document.getElementById("result").innerHTML = `Result: ${result.toFixed(2)} ${toUnit}`;
+        }
+    </script>
+</body>
+</html>
